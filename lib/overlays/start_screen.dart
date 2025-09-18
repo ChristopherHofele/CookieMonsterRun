@@ -14,62 +14,67 @@ class StartScreen extends StatelessWidget {
     const whiteTextColor = Color.fromRGBO(255, 255, 255, 1.0);
 
     return Material(
-      color: Colors.transparent,
-      child: Center(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          height: 300,
-          width: 300,
-          decoration: const BoxDecoration(
-            color: blackTextColor,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20),
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Jump Monster',
-                style: TextStyle(
-                  color: whiteTextColor,
-                  fontSize: 24,
+        color: Colors.transparent,
+        elevation: 100,
+        child: Center(
+          child: Transform.rotate(
+            angle: 1.57,
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              height: 270,
+              width: 270,
+              decoration: const BoxDecoration(
+                color: blackTextColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(20),
                 ),
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: 200,
-                height: 75,
-                child: ElevatedButton(
-                  onPressed: () {
-                    game.overlays.remove('StartScreen');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: whiteTextColor,
-                  ),
-                  child: const Text(
-                    'Start',
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Cookie Monster Run',
                     style: TextStyle(
-                      fontSize: 40.0,
-                      color: blackTextColor,
+                      color: whiteTextColor,
+                      fontSize: 24,
                     ),
                   ),
-                ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: 200,
+                    height: 75,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        game.overlays.remove('StartScreen');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: whiteTextColor,
+                      ),
+                      child: const Text(
+                        'Start',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: blackTextColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 0),
+                  const Text(
+                    '''Tap on the left to jump. 
+Tap on the right to move faster.
+Eat cookies to regain coins. 
+Stay away from enemies!!! ''',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: whiteTextColor,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 0),
-              const Text(
-                '''Tap on the left to jump. Tap on the right to move faster.
-Eat cookies to regain coins. Stay away from enemies!!! ''',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: whiteTextColor,
-                  fontSize: 14,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
