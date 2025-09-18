@@ -1,16 +1,16 @@
 import 'package:cookie_monster/jump_monster.dart';
 import 'package:flame/components.dart';
 
-enum HeartState {
+enum CoinState {
   available,
   unavailable,
 }
 
-class HeartHealthComponent extends SpriteGroupComponent<HeartState>
+class CoinHealthComponent extends SpriteGroupComponent<CoinState>
     with HasGameReference<JumpMonsterGame> {
   final int coinNumber;
 
-  HeartHealthComponent({
+  CoinHealthComponent({
     required this.coinNumber,
     required super.position,
     required super.size,
@@ -34,19 +34,19 @@ class HeartHealthComponent extends SpriteGroupComponent<HeartState>
     );
 
     sprites = {
-      HeartState.available: availableSprite,
-      HeartState.unavailable: unavailableSprite,
+      CoinState.available: availableSprite,
+      CoinState.unavailable: unavailableSprite,
     };
 
-    current = HeartState.available;
+    current = CoinState.available;
   }
 
   @override
   void update(double dt) {
     if (game.health < coinNumber) {
-      current = HeartState.unavailable;
+      current = CoinState.unavailable;
     } else {
-      current = HeartState.available;
+      current = CoinState.available;
     }
 
     super.update(dt);

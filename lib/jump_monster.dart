@@ -26,6 +26,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
   double objectSpeed = 0.0;
   int cookiesCollected = 0;
   int health = 3;
+  int bonushealth = 0;
 
   /*@override
   Color backgroundColor() {
@@ -58,6 +59,12 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
     if (health <= 0) {
       overlays.add('GameOver');
     }
+
+    if ((cookiesCollected / 10).floor() > bonushealth && health < 3) {
+      health++;
+      bonushealth++;
+    }
+
     _monster.hasJumped = jumpButton.hasTapped;
     _monster.isMoving = moveButton.moveDirection;
     super.update(dt);

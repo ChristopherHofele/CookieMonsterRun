@@ -143,7 +143,7 @@ class MonsterPlayer extends SpriteAnimationComponent
         EffectController(
           alternate: true,
           duration: 0.1,
-          repeatCount: 6,
+          repeatCount: 10,
         ),
       )..onComplete = () {
           hitByEnemy = false;

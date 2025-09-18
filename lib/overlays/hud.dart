@@ -45,7 +45,7 @@ class Hud extends PositionComponent with HasGameReference<JumpMonsterGame> {
     for (var i = 1; i <= game.health; i++) {
       final positiony = 40 * i + 30;
       await add(
-        HeartHealthComponent(
+        CoinHealthComponent(
             coinNumber: i,
             position: Vector2(350, positiony.toDouble()),
             size: Vector2.all(32),
