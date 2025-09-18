@@ -60,8 +60,10 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
       overlays.add('GameOver');
     }
 
-    if ((cookiesCollected / 10).floor() > bonushealth && health < 3) {
-      health++;
+    if ((cookiesCollected / 10).floor() > bonushealth) {
+      if (health < 3) {
+        health++;
+      }
       bonushealth++;
     }
 
@@ -124,6 +126,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
     _monster.startedMoving = false;
     objectSpeed = 0;
     lastBlockYPosition = 0;
+    bonushealth = 0;
     initializeGame(false);
   }
 }
