@@ -7,9 +7,6 @@ class JumpButton extends PositionComponent with TapCallbacks {
     required super.size,
   }) : super(anchor: Anchor.bottomLeft);
 
-  @override
-  bool get debugMode => true;
-
   bool hasTapped = false;
   @override
   void onTapDown(TapDownEvent event) {

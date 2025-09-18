@@ -7,9 +7,6 @@ class MoveButton extends PositionComponent with TapCallbacks {
     required super.size,
   }) : super(anchor: Anchor.bottomLeft);
 
-  @override
-  bool get debugMode => true;
-
   int moveDirection = 0;
   @override
   void onTapDown(TapDownEvent event) {
