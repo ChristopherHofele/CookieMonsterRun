@@ -102,8 +102,9 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
     world.add(_monster);
     world.add(moveButton);
     world.add(jumpButton);
-    camera.backdrop.add(background);
+
     if (loadHud) {
+      camera.backdrop.add(background);
       camera.backdrop.add(Hud());
     }
 
@@ -115,6 +116,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
     health = 3;
     _monster.startedMoving = false;
     objectSpeed = 0;
+    lastBlockYPosition = 0;
     initializeGame(false);
   }
 }
