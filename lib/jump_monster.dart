@@ -1,10 +1,11 @@
+import 'package:cookie_monster/actors/enemy_verti.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cookie_monster/actors/monster.dart';
 import 'package:cookie_monster/overlays/background.dart';
-import 'actors/enemy.dart';
+import 'actors/enemy_horiz.dart';
 import 'managers/segment_manager.dart';
 import 'objects/ground_block.dart';
 import 'objects/platform_block.dart';
@@ -84,8 +85,11 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
         case Cookie:
           world.add(Cookie(
               gridPosition: block.gridPosition, yOffset: yPositionOffset));
-        case Enemy:
-          world.add(Enemy(
+        case EnemyHoriz:
+          world.add(EnemyHoriz(
+              gridPosition: block.gridPosition, yOffset: yPositionOffset));
+        case EnemyVerti:
+          world.add(EnemyVerti(
               gridPosition: block.gridPosition, yOffset: yPositionOffset));
       }
     }

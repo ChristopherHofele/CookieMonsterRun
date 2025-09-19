@@ -6,7 +6,8 @@ import 'package:flame/effects.dart';
 import '../jump_monster.dart';
 import '../objects/ground_block.dart';
 import '../objects/platform_block.dart';
-import '../actors/enemy.dart';
+import 'enemy_horiz.dart';
+import 'enemy_verti.dart';
 
 class MonsterPlayer extends SpriteAnimationComponent
     with HasGameReference<JumpMonsterGame>, CollisionCallbacks {
@@ -124,7 +125,7 @@ class MonsterPlayer extends SpriteAnimationComponent
       game.cookiesCollected++;
     }
 
-    if (other is Enemy) {
+    if (other is EnemyHoriz || other is EnemyVerti) {
       hit();
     }
 

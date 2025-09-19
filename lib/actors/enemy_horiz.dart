@@ -4,14 +4,14 @@ import 'package:flame/effects.dart';
 
 import '../jump_monster.dart';
 
-class Enemy extends SpriteAnimationComponent
+class EnemyHoriz extends SpriteAnimationComponent
     with HasGameReference<JumpMonsterGame> {
   final Vector2 gridPosition;
   double yOffset;
 
   final Vector2 velocity = Vector2.zero();
 
-  Enemy({
+  EnemyHoriz({
     required this.gridPosition,
     required this.yOffset,
   }) : super(size: Vector2.all(64), anchor: Anchor.topLeft, angle: 1.57);
@@ -30,7 +30,7 @@ class Enemy extends SpriteAnimationComponent
       game.size.x / 10 + (gridPosition.y * size.y),
       (gridPosition.x * size.y) + yOffset,
     );
-    add(RectangleHitbox(collisionType: CollisionType.passive));
+    add(CircleHitbox(collisionType: CollisionType.passive));
     add(
       MoveEffect.by(
         Vector2(0, -2 * size.x),
