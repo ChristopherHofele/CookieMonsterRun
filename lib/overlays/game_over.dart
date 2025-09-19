@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../jump_monster.dart';
 
 class GameOver extends StatelessWidget {
-  // Reference to parent game.
   final JumpMonsterGame game;
   const GameOver({super.key, required this.game});
 

@@ -25,14 +25,10 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
   late MoveButton moveButton;
   late Background background;
   double objectSpeed = 0.0;
+  double difficulty = -50.0;
   int cookiesCollected = 0;
   int health = 3;
   int bonushealth = 0;
-
-  /*@override
-  Color backgroundColor() {
-    return const Color.fromARGB(255, 173, 223, 247);
-  }*/
 
   @override
   Future<void> onLoad() async {
@@ -65,6 +61,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
       if (health < 3) {
         health++;
       }
+      difficulty = difficulty * 1.5;
       bonushealth++;
     }
 
@@ -96,7 +93,6 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
   }
 
   void initializeGame(bool loadHud) {
-    // Assume that size.x < 3200
     final segmentsToLoad = (size.y / 640).ceil();
     segmentsToLoad.clamp(0, segments.length);
 
@@ -120,8 +116,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
       camera.backdrop.add(background);
       camera.backdrop.add(Hud());
     }
-
-    //camera.viewport.add(Hud());
+    ;
   }
 
   void reset() {
@@ -131,6 +126,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
     objectSpeed = 0;
     lastBlockYPosition = 0;
     bonushealth = 0;
+    difficulty = -50.0;
     initializeGame(false);
   }
 }

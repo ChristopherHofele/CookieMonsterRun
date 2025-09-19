@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../jump_monster.dart';
 
 class StartScreen extends StatelessWidget {
-  // Reference to parent game.
   final JumpMonsterGame game;
 
   const StartScreen({super.key, required this.game});

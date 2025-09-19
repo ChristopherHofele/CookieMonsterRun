@@ -45,10 +45,9 @@ class MonsterPlayer extends SpriteAnimationComponent
   @override
   void update(double dt) {
     velocity.y = isMoving * moveSpeed;
-    // Apply basic gravity
+
     velocity.x -= gravity;
 
-    // Determine if ember has jumped
     if (isOnGround) {
       velocity.x = 0;
       if (hasJumped) {
@@ -57,35 +56,30 @@ class MonsterPlayer extends SpriteAnimationComponent
       }
       isOnGround = false;
     }
-    /*
-    if (hasJumped) {
-      if (isOnGround) {
-        velocity.x = jumpSpeed;
-        isOnGround = false;
-      }
-      hasJumped = false;
-    }*/
+
     if (isMoving > 0) {
       startedMoving = true;
     }
-// Prevent ember from jumping to crazy fast as well as descending too fast and
-// crashing through the ground or a platform.
+
     velocity.x = velocity.x.clamp(-jumpSpeed, terminalVelocity);
     if (startedMoving) {
-      game.objectSpeed = -50;
+      game.objectSpeed = game.difficulty;
     }
-// Prevent ember from going backwards at screen edge.
+
     if (position.x - 36 <= 0 && isMoving < 0) {
       velocity.x = 0;
     }
-// Prevent ember from going beyond half screen.
+
     if (position.y + 64 >= game.size.y / 2 && isMoving > 0) {
       velocity.y = 0;
-      game.objectSpeed = -moveSpeed;
+      if (game.objectSpeed > -moveSpeed) {
+        game.objectSpeed = -moveSpeed;
+      } else {
+        game.objectSpeed -= moveSpeed;
+      }
     }
-
     position += velocity * dt;
-    // If ember fell in pit, then game over.
+
     if (position.x < 0) {
       game.health = 0;
     }
@@ -100,7 +94,6 @@ class MonsterPlayer extends SpriteAnimationComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is GroundBlock || other is PlatformBlock) {
       if (intersectionPoints.length >= 2) {
-        // Calculate the collision normal and separation distance.
         final mid = (intersectionPoints.elementAt(0) +
                 intersectionPoints.elementAt(1)) /
             2;
@@ -109,14 +102,10 @@ class MonsterPlayer extends SpriteAnimationComponent
         final separationDistance = (size.y / 2) - collisionNormal.length;
         collisionNormal.normalize();
 
-        // If collision normal is almost upwards,
-        // ember must be on ground.
         if (fromAbove.dot(collisionNormal) > 0.9) {
           isOnGround = true;
         }
 
-        // Resolve collision by moving ember along
-        // collision normal by separation distance.
         position += collisionNormal.scaled(separationDistance);
       }
     }
@@ -132,8 +121,6 @@ class MonsterPlayer extends SpriteAnimationComponent
     super.onCollision(intersectionPoints, other);
   }
 
-  // This method runs an opacity effect on ember
-// to make it blink.
   void hit() {
     if (!hitByEnemy) {
       game.health--;
