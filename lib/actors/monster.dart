@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:cookie_monster/objects/cookie.dart';
 import 'package:flame/effects.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import '../jump_monster.dart';
 import '../objects/ground_block.dart';
@@ -51,6 +52,7 @@ class MonsterPlayer extends SpriteAnimationComponent
     if (isOnGround) {
       velocity.x = 0;
       if (hasJumped) {
+        FlameAudio.play('cartoon_jump.mp3');
         velocity.x = jumpSpeed;
         hasJumped = false;
       }

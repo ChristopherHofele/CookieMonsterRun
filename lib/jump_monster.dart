@@ -2,6 +2,7 @@ import 'package:cookie_monster/actors/enemy_verti.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import 'package:cookie_monster/actors/monster.dart';
 import 'package:cookie_monster/overlays/background.dart';
@@ -45,6 +46,9 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
       'cookie_still.png',
       'background.png',
     ]);
+    //FlameAudio.bgm.initialize();
+    await FlameAudio.audioCache
+        .loadAll(['the_return_of_the_8_bit_era.mp3', 'cartoon_jump.mp3']);
 
     camera.viewfinder.anchor = Anchor.topLeft;
     camera.viewfinder.zoom = 0.6;
@@ -64,7 +68,6 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
       difficulty = difficulty * 1.5;
       bonushealth++;
     }
-
     _monster.hasJumped = jumpButton.hasTapped;
     _monster.isMoving = moveButton.moveDirection;
     super.update(dt);
@@ -95,7 +98,7 @@ class JumpMonsterGame extends FlameGame with HasCollisionDetection {
   void initializeGame(bool loadHud) {
     final segmentsToLoad = (size.y / 640).ceil();
     segmentsToLoad.clamp(0, segments.length);
-
+    //FlameAudio.bgm.play('the_return_of_the_8_bit_era.mp3', volume: 0.4); // does not loop???
     for (var i = 0; i <= segmentsToLoad; i++) {
       loadGameSegments(i, (640 * i).toDouble());
     }
