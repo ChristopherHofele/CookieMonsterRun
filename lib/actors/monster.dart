@@ -2,7 +2,6 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:cookie_monster/objects/cookie.dart';
 import 'package:flame/effects.dart';
-import 'package:flame_audio/flame_audio.dart';
 
 import '../jump_monster.dart';
 import '../objects/ground_block.dart';
@@ -44,7 +43,7 @@ class MonsterPlayer extends SpriteAnimationComponent
   }
 
   @override
-  void update(double dt) {
+  Future<void> update(double dt) async {
     velocity.y = isMoving * moveSpeed;
 
     velocity.x -= gravity;
@@ -52,9 +51,9 @@ class MonsterPlayer extends SpriteAnimationComponent
     if (isOnGround) {
       velocity.x = 0;
       if (hasJumped) {
-        FlameAudio.play('cartoon_jump.mp3');
         velocity.x = jumpSpeed;
         hasJumped = false;
+        await game.soundEffect.play('jump');
       }
       isOnGround = false;
     }
@@ -123,9 +122,10 @@ class MonsterPlayer extends SpriteAnimationComponent
     super.onCollision(intersectionPoints, other);
   }
 
-  void hit() {
+  void hit() async {
     if (!hitByEnemy) {
       game.health--;
+      await game.soundEffect.play('hit');
       hitByEnemy = true;
     }
     add(
